@@ -60,6 +60,11 @@ main{
 #cup.addCoffee{
     top: 0;
 }
+#cup.zoom{
+    top: 40%;
+    transform: scale(3);
+
+}
 #prep_coffee{
     display: none;
     height: 100%;
