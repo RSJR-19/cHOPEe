@@ -32,5 +32,11 @@ setTimeout(()=>{
     currentState = STATES.COFFEE_EMPTY
     setState()},1000)
 
-testButton.addEventListener('click', ()=> hand.classList.add('grab'));
+testButton.addEventListener('click', ()=> {
+    hand.classList.add('grab');
+    setTimeout(()=>{
+         cup.classList.add('move');
+        hand.classList.remove('grab');
+    }, 900);
+});
     
