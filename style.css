@@ -7,12 +7,17 @@
 
 html, body{
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
 }
 
 body {
     min-height: 100dvh;
     width: 100%;
     overflow: hidden;
+    padding: 0;
 }
 main{
     height: 100%;
@@ -23,52 +28,11 @@ main{
 }
 
 #loading{
-    background: linear-gradient(#000000, rgb(28, 28, 28));
     height: 100%;
     width: 100%;
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-#loading h1{
     color: white;
-}
-
-#main{
-    display: none;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-#main h1{
-    color: black;
-}
-#cup {
-    height: 25%;
-    width: 50%;
-    background-color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 60%;
-    transition: all ease-in 0.5s;
-    
-}
-#cup.addCoffee{
-    top: 0;
-}
-#cup.zoom{
-    top: 40%;
-    transform: scale(3);
-
-}
-#prep_coffee{
-    display: none;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
 }
