@@ -25,7 +25,10 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
+
+/*StateScreens */
 
 #loading{
     height: 100%;
@@ -35,4 +38,67 @@ main{
     justify-content: center;
     align-items: center;
     color: white;
+}
+#coffeeEmpty{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: black
+}
+
+#coffeeEmpty h1{
+    position: absolute;
+    top: 20%;
+}
+
+
+/*Overlays*/
+#overlayEmpty{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.115);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/*Objects*/
+#cup {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    background-color: red;
+    transform: translateY(0);
+
+}
+
+#hand {
+    position: absolute;
+    background-color: green;
+    height: 600px;
+    width: 80px;
+    top: 0;
+    transform: translateY(-100%);
+    transition: all ease-in 0.6s;
+}
+
+.test-button {
+    position: absolute;
+    top: 80%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* classlists */
+#hand.grab{
+    transform: translateY(-60%);
 }
