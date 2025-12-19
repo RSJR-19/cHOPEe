@@ -1,6 +1,8 @@
 const loadingScreen = document.getElementById('loading');
 const mainScreen = document.getElementById('main');
 const coffeeEmptyScreen = document.getElementById('coffee_empty');
+const cup = document.getElementById('cup');
+const hand = document.getElementById('hand');
 
 
 mainScreen.style.display = 'none';
@@ -37,9 +39,10 @@ window.addEventListener('load', ()=>{
     setTimeout(()=>{
         mainScreen.style.display = 'flex';
         stateMachine('coffee_empty')
-    },1000);
+    },1000); //For testing only //
 });
 
+cup.addEventListener('click', ()=> hand.classList.add('down'));
 
 
 

@@ -34,10 +34,25 @@ main{
     width: 100%;
     background-color: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color:black;
     position: relative;
+}
+.spacer{
+    height: 5%;
+    width: 100%;
+    background-color: red;
+}
+.stage{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 /*Screen States */
@@ -54,9 +69,32 @@ main{
 #coffee_empty{
     height: 100%;
     width: 100%;
-    position: absolute;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    position: absolute;
+}
+
+
+/* Objects */
+#cup{
+    height: 270px;
+    width: 270px;
+    background-color: yellow;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#hand{
+    height: 1000px;
+    width: 70px;
+    background-color: green;
+    position: absolute;
+    transform: translateY(-100%);
+    
+    transition: transform 0.5s ease-out;
+}
+
+#hand.down{
+    transform: translateY(-75%);
 }
