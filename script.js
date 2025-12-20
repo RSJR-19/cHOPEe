@@ -1,6 +1,8 @@
 const loadingScreen = document.getElementById('loading');
 const mainScreen = document.getElementById('main');
 const coffeeEmptyScreen = document.getElementById('coffee_empty');
+const prepCoffeeScreen = document.getElementById('prep_coffee');
+
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
 
@@ -37,21 +39,20 @@ const stateMachine = (currentState)=>{
             hand.style.bottom = `${windowHeight}px`;
 
             break
+
+        case STATES.PREP_COFFEE:
+            setStatus(prepCoffeeScreen);
+            break
     }
 }
 
 window.addEventListener('load', ()=>{
-    stateMachine('loading_screen');
+    stateMachine(STATES.LOADING);
     setTimeout(()=>{
         mainScreen.style.display = 'flex';
-        stateMachine('coffee_empty');
+        stateMachine(STATES.COFFEE_EMPTY);
         console.log(coffeeEmptyScreen.clientHeight);
 
-        const handRect = hand.getBoundingClientRect();
-        const cupRect = cup.getBoundingClientRect();
-        console.log('cup', cupRect);
-        console.log('hand',handRect);
-        console.log(parseFloat(getComputedStyle(hand).bottom));
     },1000); //For testing only //
 });
 
@@ -61,18 +62,19 @@ const grabCup=()=>{
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
 
     const target = cupRect.bottom - ((windowHeight * 7.5)/100);
+
     const distance = target - currentBottom;
     
 
-    if (Math.abs(distance) < 1){
+    if (Math.abs(distance)<1){
         requestAnimationFrame(takeCupBack);
+
         return;
     }
-
     const ease = 0.15;
 
     
-    hand.style.bottom = `${currentBottom + distance * ease }px`;
+    hand.style.bottom = `${currentBottom + (distance * ease)}px`;
 
     requestAnimationFrame(grabCup);
 
@@ -84,17 +86,14 @@ const takeCupBack = () =>{
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
     const cupCurrentBottom = parseFloat(getComputedStyle(cup).bottom);
 
-    const target = windowHeight;
+    if (currentBottom >= windowHeight && cupCurrentBottom >= windowHeight){
 
-    const handDist = target - currentBottom;
-    const cupDist = target - cupCurrentBottom;
-
-    if (Math.abs(handDist) < 1 && Math.abs(cupDist) < 1){
+        stateMachine(STATES.PREP_COFFEE);
         return
     };
 
-    hand.style.bottom = `${currentBottom + 12}px`;
-    cup.style.bottom = `${cupCurrentBottom + 12}px`;
+    hand.style.bottom = `${currentBottom + 10}px`;
+    cup.style.bottom = `${cupCurrentBottom + 10}px`;
 
     requestAnimationFrame(takeCupBack);
 }
