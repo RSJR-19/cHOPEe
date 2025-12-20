@@ -59,15 +59,20 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
+
+    const target = cupRect.bottom - ((windowHeight * 7.5)/100);
+    const distance = target - currentBottom;
     
 
-    if (currentBottom <= cupRect.bottom - ((windowHeight * 7.5)/100)){
+    if (Math.abs(distance) < 1){
         requestAnimationFrame(takeCupBack);
         return;
     }
 
+    const ease = 0.15;
+
     
-    hand.style.bottom = `${currentBottom - 10}px`;
+    hand.style.bottom = `${currentBottom + distance * ease }px`;
 
     requestAnimationFrame(grabCup);
 
@@ -79,13 +84,17 @@ const takeCupBack = () =>{
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
     const cupCurrentBottom = parseFloat(getComputedStyle(cup).bottom);
 
-    if (currentBottom >= windowHeight && cupCurrentBottom >= windowHeight){
-        
+    const target = windowHeight;
+
+    const handDist = target - currentBottom;
+    const cupDist = target - cupCurrentBottom;
+
+    if (Math.abs(handDist) < 1 && Math.abs(cupDist) < 1){
         return
     };
 
-    hand.style.bottom = `${currentBottom + 10}px`;
-    cup.style.bottom = `${cupCurrentBottom + 10}px`;
+    hand.style.bottom = `${currentBottom + 12}px`;
+    cup.style.bottom = `${cupCurrentBottom + 12}px`;
 
     requestAnimationFrame(takeCupBack);
 }
