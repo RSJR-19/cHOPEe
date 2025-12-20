@@ -114,3 +114,19 @@ main{
     z-index: 3;
 }
 
+@media (min-width: 1024px) {
+    #cup{
+        width: 40%;
+    }
+    #hand{
+        width: 10%;
+    }
+    .bot_spacer{
+        height: 5dvh;
+        
+    }
+    .top_spacer{
+        height: 5dvh;
+    }
+
+}

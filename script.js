@@ -59,8 +59,10 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
+    
 
     if (currentBottom <= cupRect.bottom - ((windowHeight * 7.5)/100)){
+        requestAnimationFrame(takeCupBack);
         return;
     }
 
@@ -71,6 +73,23 @@ const grabCup=()=>{
 
 
 }
+
+const takeCupBack = () =>{
+    const cupRect = cup.getBoundingClientRect();
+    const currentBottom = parseFloat(getComputedStyle(hand).bottom);
+    const cupCurrentBottom = parseFloat(getComputedStyle(cup).bottom);
+
+    if (currentBottom >= windowHeight && cupCurrentBottom >= windowHeight){
+        
+        return
+    };
+
+    hand.style.bottom = `${currentBottom + 10}px`;
+    cup.style.bottom = `${cupCurrentBottom + 10}px`;
+
+    requestAnimationFrame(takeCupBack);
+}
+
 
 
 
