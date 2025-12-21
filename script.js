@@ -8,14 +8,14 @@ const returnCoffeeScreen = document.getElementById('return_coffee');
 
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
+const cupStatus = document.getElementById('cup_status');
 
 const windowHeight = window.innerHeight;
 const currentScreenState = document.getElementById('currentScreenState');
 
-let initialCupBot = "";
-let handCollisionPoint = '';
+let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
+let handCollisionPoint = ''; // this is the collision point ng hand at ng cup.
 let todayQuote = "";
-
 
 
 mainScreen.style.display = 'none';
@@ -44,7 +44,8 @@ const stateMachine = (currentState)=>{
         case STATES.COFFEE_EMPTY:
             setStatus(coffeeEmptyScreen);
             hand.style.bottom = `${windowHeight}px`;
-            initialCupBot = getComputedStyle(cup).bottom;
+            cupStatus.innerHTML = 'Empty';
+            initialCupBot = parseFloat(getComputedStyle(cup).bottom);
 
             break
 
@@ -58,7 +59,9 @@ const stateMachine = (currentState)=>{
 
         case STATES.RETURN_COFFEE:
             setStatus(coffeeEmptyScreen);
-            currentScreenState.innerHTML = 'Return_coffee'
+            cupStatus.innerHTML = 'Full';
+            currentScreenState.innerHTML = 'Return_coffee';
+            requestAnimationFrame(returnCupBack);
 
             break
     }
@@ -78,12 +81,10 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
-    console.log('cup bot', parseFloat(getComputedStyle(cup).bottom));
-    console.log('hand bot',currentBottom);
-
     const target = cupRect.bottom - ((windowHeight * 7.5)/100);
-    handCollisionPoint = target;
     const distance = target - currentBottom;
+
+    handCollisionPoint = target;
     
 
     if (Math.abs(distance)<1){
@@ -119,7 +120,24 @@ const takeCupBack = () =>{
 }
 
 const returnCupBack = () =>{
+    const cupBottom = parseFloat(getComputedStyle(cup).bottom);
+    const handBottom = parseFloat(getComputedStyle(hand).bottom);
+
+    console.log(cupBottom, initialCupBot);
+    console.log(handBottom, handCollisionPoint);
+
+    if (cupBottom <= initialCupBot && handBottom <= handCollisionPoint){
+
+        //to add take back hand here
+        return
+
+    }
+
+    cup.style.bottom = `${cupBottom - 10}px`;
+    hand.style.bottom = `${handBottom - 10}px`;
     
+    requestAnimationFrame(returnCupBack);
+
 }
 
 
