@@ -175,6 +175,7 @@ cup.addEventListener('click', ()=>{
     }
     else{
         cup.style.transform = "scale(2)";
+        
     }
 });
 
