@@ -6,15 +6,19 @@ const coffeeEmptyScreen = document.getElementById('coffee_empty');
 const prepCoffeeScreen = document.getElementById('prep_coffee');
 const returnCoffeeScreen = document.getElementById('return_coffee');
 
+
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
 const cupStatus = document.getElementById('cup_status');
+
+let cupEmpty = true;
 
 const windowHeight = window.innerHeight;
 const currentScreenState = document.getElementById('currentScreenState');
 
 let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
 let handCollisionPoint = ''; // this is the collision point ng hand at ng cup.
+
 let todayQuote = "";
 
 
@@ -61,9 +65,18 @@ const stateMachine = (currentState)=>{
             setStatus(coffeeEmptyScreen);
             cupStatus.innerHTML = 'Full';
             currentScreenState.innerHTML = 'Return_coffee';
+            returnCoffeeScreen.style.display = 'flex';
             requestAnimationFrame(returnCupBack);
 
             break
+
+        case STATES.COFFEE_READY:
+
+            cupEmpty = false;
+            returnCoffeeScreen.style.display = 'none';
+
+            break
+            
     }
 }
 
@@ -127,8 +140,8 @@ const returnCupBack = () =>{
     console.log(handBottom, handCollisionPoint);
 
     if (cupBottom <= initialCupBot && handBottom <= handCollisionPoint){
-
-        //to add take back hand here
+        setTimeout(()=>requestAnimationFrame(returnHand), 200);
+        
         return
 
     }
@@ -140,10 +153,29 @@ const returnCupBack = () =>{
 
 }
 
+const returnHand = ()=>{
+    const handPosition = parseFloat(getComputedStyle(hand).bottom);
+    
+    if (windowHeight <= handPosition){
+        stateMachine(STATES.COFFEE_READY);
+        return
+    }
+
+    hand.style.bottom = `${handPosition + 10}px`;
+    requestAnimationFrame(returnHand);
+}
+
+
 
 
 cup.addEventListener('click', ()=>{
-    requestAnimationFrame(grabCup);
+    if (cupEmpty){
+        requestAnimationFrame(grabCup);
+        returnCoffeeScreen.style.display = 'flex';
+    }
+    else{
+        cup.style.transform = "scale(2)";
+    }
 });
 
 window.addEventListener('resize', ()=>location.reload());

@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: monospace;
+    user-select: none;
 }
 
 html, body{
@@ -47,6 +48,7 @@ main{
     position: absolute;
     top: 0;
     z-index: 22;
+    
 }
 .bot_spacer{
     height: 10dvh;
@@ -100,6 +102,8 @@ main{
     justify-content: center;
     align-items: center;
     position: absolute;
+    z-index: 5;
+
 }
 
 /* Objects */
@@ -113,6 +117,8 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: transform ease-out 0.3s;
 }
 
 #hand{
@@ -124,19 +130,24 @@ main{
     z-index: 3;
 }
 
-@media (min-width: 1024px) {
+/* Classlists */
+#cup.reveal{
+    transform: scale(50%);
+}
+
+@media (min-width: 900px) {
     #cup{
-        width: 50%;
+        width: 40%;
     }
     #hand{
         width: 10%;
     }
     .bot_spacer{
-        height: 5dvh;
+        height: 0dvh;
         
     }
     .top_spacer{
-        height: 5dvh;
+        height: 0dvh;
     }
 
 }
