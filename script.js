@@ -1,12 +1,20 @@
+import getQuoteToday from "./quotes.js";
+
 const loadingScreen = document.getElementById('loading');
 const mainScreen = document.getElementById('main');
 const coffeeEmptyScreen = document.getElementById('coffee_empty');
 const prepCoffeeScreen = document.getElementById('prep_coffee');
+const returnCoffeeScreen = document.getElementById('return_coffee');
 
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
 
 const windowHeight = window.innerHeight;
+const currentScreenState = document.getElementById('currentScreenState');
+
+let initialCupBot = "";
+let handCollisionPoint = '';
+let todayQuote = "";
 
 
 
@@ -35,13 +43,23 @@ const stateMachine = (currentState)=>{
         
         case STATES.COFFEE_EMPTY:
             setStatus(coffeeEmptyScreen);
-
             hand.style.bottom = `${windowHeight}px`;
+            initialCupBot = getComputedStyle(cup).bottom;
 
             break
 
         case STATES.PREP_COFFEE:
             setStatus(prepCoffeeScreen);
+            todayQuote = getQuoteToday(1);
+
+            setTimeout(()=>stateMachine(STATES.RETURN_COFFEE), 2000); //testing value only;
+
+            break
+
+        case STATES.RETURN_COFFEE:
+            setStatus(coffeeEmptyScreen);
+            currentScreenState.innerHTML = 'Return_coffee'
+
             break
     }
 }
@@ -51,7 +69,7 @@ window.addEventListener('load', ()=>{
     setTimeout(()=>{
         mainScreen.style.display = 'flex';
         stateMachine(STATES.COFFEE_EMPTY);
-        console.log(coffeeEmptyScreen.clientHeight);
+        
 
     },1000); //For testing only //
 });
@@ -60,9 +78,11 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
+    console.log('cup bot', parseFloat(getComputedStyle(cup).bottom));
+    console.log('hand bot',currentBottom);
 
     const target = cupRect.bottom - ((windowHeight * 7.5)/100);
-
+    handCollisionPoint = target;
     const distance = target - currentBottom;
     
 
@@ -98,10 +118,9 @@ const takeCupBack = () =>{
     requestAnimationFrame(takeCupBack);
 }
 
-
-
-
-
+const returnCupBack = () =>{
+    
+}
 
 
 
@@ -110,8 +129,6 @@ cup.addEventListener('click', ()=>{
 });
 
 window.addEventListener('resize', ()=>location.reload());
-
-
 
 
 

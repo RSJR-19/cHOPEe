@@ -93,7 +93,14 @@ main{
     align-items: center;
     position: absolute;
 }
-
+#return_coffee{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
 
 /* Objects */
 #cup{
@@ -116,7 +123,7 @@ main{
 
 @media (min-width: 1024px) {
     #cup{
-        width: 20%;
+        width: 50%;
     }
     #hand{
         width: 10%;
