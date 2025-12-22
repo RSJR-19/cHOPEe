@@ -99,7 +99,8 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
-    const target = cupRect.bottom - (Math.abs((windowHeight - windowWidth)*5.5)/100);
+
+    const target = cupRect.bottom - (windowHeight * (windowWidth/100)/100);
     const distance = target - currentBottom;
 
     handCollisionPoint = target;
