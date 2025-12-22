@@ -121,6 +121,32 @@ main{
     transition: transform ease-out 0.3s;
 }
 
+#cup_content{
+    width: 70%;
+    background-color: rgba(255, 0, 0, 0.245);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.cup_handle{
+    height: 10%;
+    width: 50%;
+    background-color: rgba(255, 0, 0, 0.245);
+    position: absolute;
+    left: 75%;
+
+}
+#quote_container{
+    
+    background-color: green;
+    aspect-ratio: 1/1;
+}
+
+
+
 #hand{
     height:50%;
     width: 15%;
@@ -132,8 +158,8 @@ main{
 
 /* Classlists */
 #cup.reveal{
-    transform: scale(50%);
-    transform: translate(50%,50%);
+    transform: scale(250%);
+    
 }
 
 @media (min-width: 900px) {

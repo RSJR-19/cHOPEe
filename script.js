@@ -1,5 +1,6 @@
 import getQuoteToday from "./quotes.js";
 
+
 const loadingScreen = document.getElementById('loading');
 const mainScreen = document.getElementById('main');
 const coffeeEmptyScreen = document.getElementById('coffee_empty');
@@ -9,11 +10,12 @@ const returnCoffeeScreen = document.getElementById('return_coffee');
 
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
-const cupStatus = document.getElementById('cup_status');
+
 
 let cupEmpty = true;
 
 const windowHeight = window.innerHeight;
+const windowWidth = window.innerWidth;
 const currentScreenState = document.getElementById('currentScreenState');
 
 let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
@@ -48,7 +50,6 @@ const stateMachine = (currentState)=>{
         case STATES.COFFEE_EMPTY:
             setStatus(coffeeEmptyScreen);
             hand.style.bottom = `${windowHeight}px`;
-            cupStatus.innerHTML = 'Empty';
             initialCupBot = parseFloat(getComputedStyle(cup).bottom);
 
             break
@@ -63,7 +64,6 @@ const stateMachine = (currentState)=>{
 
         case STATES.RETURN_COFFEE:
             setStatus(coffeeEmptyScreen);
-            cupStatus.innerHTML = 'Full';
             currentScreenState.innerHTML = 'Return_coffee';
             returnCoffeeScreen.style.display = 'flex';
             requestAnimationFrame(returnCupBack);
@@ -76,6 +76,11 @@ const stateMachine = (currentState)=>{
             returnCoffeeScreen.style.display = 'none';
 
             break
+
+        case STATES.QUOTE_REVEAL:
+            cup.classList.toggle('reveal');
+            break
+
             
     }
 }
@@ -94,13 +99,13 @@ const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
-    const target = cupRect.bottom - ((windowHeight * 7.5)/100);
+    const target = cupRect.bottom - (Math.abs((windowHeight - windowWidth)*5.5)/100);
     const distance = target - currentBottom;
 
     handCollisionPoint = target;
     
 
-    if (Math.abs(distance)<1){
+    if (Math.abs(distance)< 1){
         requestAnimationFrame(takeCupBack);
 
         return;
@@ -135,6 +140,8 @@ const takeCupBack = () =>{
 const returnCupBack = () =>{
     const cupBottom = parseFloat(getComputedStyle(cup).bottom);
     const handBottom = parseFloat(getComputedStyle(hand).bottom);
+
+
 
     console.log(cupBottom, initialCupBot);
     console.log(handBottom, handCollisionPoint);
@@ -174,8 +181,9 @@ cup.addEventListener('click', ()=>{
         returnCoffeeScreen.style.display = 'flex';
     }
     else{
-        cup.style.transform = "scale(2)";
+        stateMachine(STATES.QUOTE_REVEAL);
         
+
     }
 });
 
