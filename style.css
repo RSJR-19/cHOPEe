@@ -108,7 +108,6 @@ main{
 
 /* Objects */
 #cup{
-    width: 70%;
     aspect-ratio: 1/1;
     background-color: yellow;
     position: absolute;
@@ -164,7 +163,7 @@ main{
 
 @media (min-width: 900px) {
     #cup{
-        width: 40%;
+        
     }
     #hand{
         width: 10%;
