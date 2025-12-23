@@ -148,7 +148,6 @@ main{
 
 #hand{
     height:50%;
-    width: 15%;
     background-color: green;
     position: absolute;
     transition: transform 0.5s ease-out;
@@ -162,9 +161,7 @@ main{
 }
 
 @media (min-width: 900px) {
-    #cup{
-        
-    }
+
     #hand{
         width: 10%;
     }

@@ -27,6 +27,7 @@ let todayQuote = "";
 mainScreen.style.display = 'none';
 
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
+hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
 
 const STATES = {
     LOADING : 'loading_screen',
@@ -53,6 +54,8 @@ const stateMachine = (currentState)=>{
             setStatus(coffeeEmptyScreen);
             hand.style.bottom = `${windowHeight}px`;
             initialCupBot = parseFloat(getComputedStyle(cup).bottom);
+
+            
 
             break
 
@@ -97,12 +100,13 @@ window.addEventListener('load', ()=>{
     },1000); //For testing only //
 });
 
+
 const grabCup=()=>{
 
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
-
-    const target = cupRect.bottom - (windowHeight * (windowWidth/150)/100);
+    const cupHeight = cup.getBoundingClientRect().height;
+    const target = cupRect.bottom - ((cupHeight * 10) / 100 );
     const distance = target - currentBottom;
 
     handCollisionPoint = target;
