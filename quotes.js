@@ -1,5 +1,5 @@
 const quotes = {
-    1 : "The winner takes it all",
+    1 : "Aguy",
 }
 
 const getQuoteToday =(day)=>{

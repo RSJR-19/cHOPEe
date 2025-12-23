@@ -10,7 +10,7 @@ const returnCoffeeScreen = document.getElementById('return_coffee');
 
 const cup = document.getElementById('cup');
 const hand = document.getElementById('hand');
-
+const quote = document.getElementById('quote');
 
 let cupEmpty = true;
 
@@ -62,6 +62,7 @@ const stateMachine = (currentState)=>{
         case STATES.PREP_COFFEE:
             setStatus(prepCoffeeScreen);
             todayQuote = getQuoteToday(1);
+            quote.innerHTML = todayQuote;
 
             setTimeout(()=>stateMachine(STATES.RETURN_COFFEE), 2000); //testing value only;
 

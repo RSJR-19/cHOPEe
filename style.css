@@ -139,11 +139,26 @@ main{
 
 }
 #quote_container{
-    
-    background-color: green;
+    height: 60%;
+   
     aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    
+
 }
 
+#quote{
+    padding: 5%;
+    font-size: 3vh;
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+}
 
 
 #hand{
