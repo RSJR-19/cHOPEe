@@ -6,7 +6,7 @@ const mainScreen = document.getElementById('main');
 const coffeeEmptyScreen = document.getElementById('coffee_empty');
 const prepCoffeeScreen = document.getElementById('prep_coffee');
 const returnCoffeeScreen = document.getElementById('return_coffee');
-const coffeeReadyScreen = document.getElementById('coffee_readu');
+const coffeeReadyScreen = document.getElementById('coffee_ready');
 const revealQuoteScreen = document.getElementById('quote_reveal');
 
 
@@ -79,9 +79,9 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.COFFEE_READY:
-            
             cupEmpty = false;
             returnCoffeeScreen.style.display = 'none';
+            revealQuoteScreen.style.display = 'none';
 
             break
 
@@ -94,17 +94,20 @@ const stateMachine = (currentState)=>{
                     if (toReveal){
                         toReveal = false;
                         quote.classList.add('display');
+                         quote.style.transition = 'opacity 1s ease-in';
                         
                     }
                     else{
                         toReveal = true;
                         quote.classList.remove('display');
+                        quote.style.transition = 'opacity 0.5s ease-in-out';
+                       
                         
                     }  
                 }}, {once: true})
             quote.addEventListener('transitionend', (e)=>{
                 if (e.propertyName == "opacity"){
-                    revealQuoteScreen.style.display = "none"
+                    stateMachine(STATES.COFFEE_READY);
                 }}, {once: true})
             break
 
