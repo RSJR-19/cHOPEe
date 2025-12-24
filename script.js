@@ -85,6 +85,10 @@ const stateMachine = (currentState)=>{
 
         case STATES.QUOTE_REVEAL:
             cup.classList.toggle('reveal');
+            cup.addEventListener('transitionend', (e)=>{
+                if (e.propertyName == "transform"){
+                    alert('hi')
+                }}, {once: true})
             break
 
             
