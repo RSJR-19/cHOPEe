@@ -105,6 +105,15 @@ main{
     z-index: 5;
 
 }
+#quote_reveal{
+    height: 100%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 10;
+}
 
 /* Objects */
 #cup{
@@ -152,11 +161,14 @@ main{
 }
 
 #quote{
+    opacity: 0;
     padding: 5%;
     font-size: 3vh;
     width: 100%;
     white-space: normal;
     overflow-wrap: break-word;
+
+    transition: opacity 1s ease-in;
 
 }
 
@@ -174,6 +186,11 @@ main{
     transform: scale(250%);
     
 }
+
+#quote.display{
+    opacity: 1;
+}
+
 
 @media (min-width: 900px) {
 
