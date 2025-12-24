@@ -8,6 +8,10 @@ const prepCoffeeScreen = document.getElementById('prep_coffee');
 const returnCoffeeScreen = document.getElementById('return_coffee');
 const coffeeReadyScreen = document.getElementById('coffee_ready');
 const revealQuoteScreen = document.getElementById('quote_reveal');
+const quoteContainerSize = parseFloat(getComputedStyle(document.getElementById('quote_container')).height);
+const quoteContainer = document.getElementById('quote_container');
+
+
 
 
 const cup = document.getElementById('cup');
@@ -30,6 +34,8 @@ mainScreen.style.display = 'none';
 
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
+
+
 
 const STATES = {
     LOADING : 'loading_screen',
@@ -86,7 +92,7 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.QUOTE_REVEAL:
-
+            quote.style.fontSize = `${(quoteContainer.clientHeight * 70)/100}%`
             cup.classList.toggle('reveal');
             revealQuoteScreen.style.display = "flex";
             cup.addEventListener('transitionend', (e)=>{
@@ -131,6 +137,7 @@ const grabCup=()=>{
     const cupRect = cup.getBoundingClientRect();
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
     const cupHeight = cup.getBoundingClientRect().height;
+
     const target = cupRect.bottom - ((cupHeight * 10) / 100 );
     const distance = target - currentBottom;
 

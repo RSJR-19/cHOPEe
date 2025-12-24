@@ -151,12 +151,13 @@ main{
 }
 #quote_container{
     height: 60%;
-   
+   background-color: red;
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    line-height: 1.2;
     overflow: hidden;
     
 
@@ -165,7 +166,7 @@ main{
 #quote{
     opacity: 0;
     padding: 5%;
-    font-size: 3vh;
+    
     width: 100%;
     white-space: normal;
     overflow-wrap: break-word;
