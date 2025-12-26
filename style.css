@@ -119,8 +119,12 @@ main{
 
 /* Objects */
 #cup{
+    background: url(Plate.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     aspect-ratio: 1/1;
-    background-color: yellow;
+
     position: absolute;
     border-radius: 50%;
     z-index: 2;
@@ -132,26 +136,32 @@ main{
 }
 
 #cup_content{
-    width: 70%;
-    background-color: rgba(255, 0, 0, 0.245);
+    background: url(Empty_Cup.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 65%;
+    
     aspect-ratio: 1/1;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    
 }
+
 .cup_handle{
     height: 10%;
-    width: 50%;
-    background-color: rgba(255, 0, 0, 0.245);
+    width: 25%;
+    background-color: red;
     position: absolute;
-    left: 75%;
-
+    left: 96%;
+    z-index: 1;
 }
 #quote_container{
     height: 60%;
-   background-color: red;
+   
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
