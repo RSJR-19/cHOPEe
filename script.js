@@ -15,6 +15,7 @@ const quoteContainer = document.getElementById('quote_container');
 
 
 const cup = document.getElementById('cup');
+const cupContent = document.getElementById('cup_content');
 const hand = document.getElementById('hand');
 const quote = document.getElementById('quote');
 
@@ -68,7 +69,12 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.PREP_COFFEE:
+            const filledCup = "(Filled_cup.svg)";
             setStatus(prepCoffeeScreen);
+            cupContent.style.background = `url${filledCup}`;
+            cupContent.style.backgroundSize = "contain";
+            cupContent.style.backgroundPosition = 'center';
+            cupContent.style.backgroundRepeat = 'no-repeat';
             todayQuote = getQuoteToday(1);
             quote.innerHTML = todayQuote;
 

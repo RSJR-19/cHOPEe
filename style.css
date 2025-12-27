@@ -142,6 +142,7 @@ main{
     background-size: cover;
     width: 65%;
     
+    
     aspect-ratio: 1/1;
     border-radius: 50%;
     display: flex;
@@ -152,16 +153,20 @@ main{
 }
 
 .cup_handle{
+    background-color: whitesmoke;
+    border-top: 3px solid rgb(54, 54, 54);
+    border-right: 3px solid rgb(54, 54, 54);
+    border-bottom: 3px solid rgb(54, 54, 54);
+    border-radius: 0px 5px 5px 0px;
     height: 10%;
     width: 25%;
-    background-color: red;
     position: absolute;
     left: 96%;
     z-index: 1;
 }
+
 #quote_container{
     height: 60%;
-   
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
@@ -176,7 +181,7 @@ main{
 #quote{
     opacity: 0;
     padding: 5%;
-    
+    color: white;
     width: 100%;
     white-space: normal;
     overflow-wrap: break-word;
