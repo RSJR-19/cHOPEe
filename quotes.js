@@ -1,5 +1,5 @@
 const quotes = {
-    1 : "Live as if it's your last day and you will do everything better.",
+    1 : "The quick brown fox jumps over the lazy dog again and again and again, sometimes I think I want to stop.",
 }
 
 const getQuoteToday =(day)=>{

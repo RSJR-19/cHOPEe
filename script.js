@@ -98,7 +98,7 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.QUOTE_REVEAL:
-            quote.style.fontSize = `${(quoteContainer.clientHeight * 70)/100}%`
+            quote.style.fontSize = `${(quoteContainer.clientHeight * 40)/100}%`
             cup.classList.toggle('reveal');
             revealQuoteScreen.style.display = "flex";
             cup.addEventListener('transitionend', (e)=>{
@@ -210,6 +210,7 @@ const returnHand = ()=>{
     
     if (windowHeight <= handPosition){
         stateMachine(STATES.COFFEE_READY);
+        
         return
     }
 

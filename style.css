@@ -142,7 +142,7 @@ main{
     background-size: cover;
     width: 65%;
     
-    
+
     aspect-ratio: 1/1;
     border-radius: 50%;
     display: flex;
@@ -151,6 +151,25 @@ main{
     position: relative;
     
 }
+
+#cup_content_display{
+        background: url(Filled_cup.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    
+    
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    animation: stir 10s linear infinite;
+}
+
 
 .cup_handle{
     background-color: whitesmoke;
@@ -208,6 +227,15 @@ main{
 #quote.display{
     opacity: 1;
 }
+
+
+/* animations / Keyframes */
+@keyframes stir{
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
 
 @media (min-width: 900px) {
