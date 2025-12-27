@@ -17,6 +17,7 @@ const quoteContainer = document.getElementById('quote_container');
 const cup = document.getElementById('cup');
 const cupContent = document.getElementById('cup_content');
 const spinningLayer = document.getElementById('cup_content_display');
+const handle = document.getElementById('handle');
 const hand = document.getElementById('hand');
 const quote = document.getElementById('quote');
 
@@ -30,6 +31,7 @@ let initialCupBot = ""; // This is the initial position of the empty cup bago yu
 let handCollisionPoint = ''; // this is the collision point ng hand at ng cup.
 
 let todayQuote = "";
+let toReveal = true;
 
 
 mainScreen.style.display = 'none';
@@ -96,6 +98,7 @@ const stateMachine = (currentState)=>{
 
         case STATES.COFFEE_READY:
             cupEmpty = false;
+            
             returnCoffeeScreen.style.display = 'none';
             revealQuoteScreen.style.display = 'none';
 
@@ -103,29 +106,9 @@ const stateMachine = (currentState)=>{
 
         case STATES.QUOTE_REVEAL:
             quote.style.fontSize = `${(quoteContainer.clientHeight * 40)/100}%`
-            cup.classList.toggle('reveal');
             revealQuoteScreen.style.display = "flex";
-            cup.addEventListener('transitionend', (e)=>{
-                if (e.propertyName == "transform"){
-                    if (toReveal){
-                        toReveal = false;
-                        quote.classList.add('display');
-                         quote.style.transition = 'opacity 1s ease-in';
-                        
-                    }
-                    else{
-                        toReveal = true;
-                        quote.classList.remove('display');
-                        quote.style.transition = 'opacity 0.5s ease-in-out';
-                       
-                        
-                    }  
-                }}, {once: true})
-            quote.addEventListener('transitionend', (e)=>{
-                if (e.propertyName == "opacity"){
-                    stateMachine(STATES.COFFEE_READY);
-                }}, {once: true})
-            break
+            if (toReveal ? requestAnimationFrame(ZoomIn) : requestAnimationFrame(ZoomOut));
+
 
             
     }
@@ -215,6 +198,7 @@ const returnHand = ()=>{
     if (windowHeight <= handPosition){
         stateMachine(STATES.COFFEE_READY);
         spinningLayer.style.display = 'flex';
+       
         return
     }
 
@@ -222,8 +206,45 @@ const returnHand = ()=>{
     requestAnimationFrame(returnHand);
 }
 
+const revealSize = 2.5;
+let currentScale = 1;
 
-let toReveal = true;
+
+const ZoomIn =()=>{
+    toReveal = false;
+
+    if (currentScale >= revealSize){
+        
+        setTimeout(()=>quote.classList.add('display'), 500);
+        setTimeout(()=>{
+            revealQuoteScreen.style.display = "none";
+            
+        }, 1200);
+
+        return
+    }
+
+    cup.style.transform = `scale(${currentScale})`;
+    currentScale += 0.03;
+    requestAnimationFrame(ZoomIn);
+  
+}
+const ZoomOut =()=>{
+    quote.classList.remove('display')
+    revealQuoteScreen.style.display = "flex";
+    if (currentScale <= 1){
+        toReveal = true
+        revealQuoteScreen.style.display = "none";
+        stateMachine(STATES.COFFEE_READY);
+        return
+    }
+    cup.style.transform = `scale(${currentScale})`;
+     currentScale -= 0.03;
+
+    requestAnimationFrame(ZoomOut);
+}
+    
+
 
 cup.addEventListener('click', ()=>{
     if (cupEmpty){

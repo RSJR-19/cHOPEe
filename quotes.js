@@ -1,5 +1,5 @@
 const quotes = {
-    1 : "The quick brown fox jumps over the lazy dog again and again and again, sometimes I think I want to stop.",
+    1 : "But take Heart, I have overcome the world </br> John 16:33",
 }
 
 const getQuoteToday =(day)=>{
