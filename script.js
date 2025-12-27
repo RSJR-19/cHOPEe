@@ -16,6 +16,7 @@ const quoteContainer = document.getElementById('quote_container');
 
 const cup = document.getElementById('cup');
 const cupContent = document.getElementById('cup_content');
+const spinningLayer = document.getElementById('cup_content_display');
 const hand = document.getElementById('hand');
 const quote = document.getElementById('quote');
 
@@ -61,6 +62,7 @@ const stateMachine = (currentState)=>{
         
         case STATES.COFFEE_EMPTY:
             setStatus(coffeeEmptyScreen);
+            spinningLayer.style.display = 'none';
             hand.style.bottom = `${windowHeight}px`;
             initialCupBot = parseFloat(getComputedStyle(cup).bottom);
 
@@ -71,6 +73,7 @@ const stateMachine = (currentState)=>{
         case STATES.PREP_COFFEE:
             const filledCup = "(Filled_cup.svg)";
             setStatus(prepCoffeeScreen);
+            returnCoffeeScreen.style.display = 'flex';
             cupContent.style.background = `url${filledCup}`;
             cupContent.style.backgroundSize = "contain";
             cupContent.style.backgroundPosition = 'center';
@@ -84,6 +87,7 @@ const stateMachine = (currentState)=>{
 
         case STATES.RETURN_COFFEE:
             setStatus(coffeeEmptyScreen);
+            
             currentScreenState.innerHTML = 'Return_coffee';
             returnCoffeeScreen.style.display = 'flex';
             requestAnimationFrame(returnCupBack);
@@ -210,7 +214,7 @@ const returnHand = ()=>{
     
     if (windowHeight <= handPosition){
         stateMachine(STATES.COFFEE_READY);
-        
+        spinningLayer.style.display = 'flex';
         return
     }
 
@@ -224,7 +228,6 @@ let toReveal = true;
 cup.addEventListener('click', ()=>{
     if (cupEmpty){
         requestAnimationFrame(grabCup);
-        returnCoffeeScreen.style.display = 'flex';
     }
     else{
         stateMachine(STATES.QUOTE_REVEAL);

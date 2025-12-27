@@ -149,6 +149,7 @@ main{
     justify-content: center;
     align-items: center;
     position: relative;
+    isolation: isolate;
     
 }
 
@@ -166,8 +167,9 @@ main{
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 1;
-    animation: stir 10s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+    animation: stir 60s linear infinite;
 }
 
 
@@ -193,7 +195,7 @@ main{
     text-align: center;
     line-height: 1.2;
     overflow: hidden;
-    
+    z-index: 2;
 
 }
 
@@ -204,7 +206,7 @@ main{
     width: 100%;
     white-space: normal;
     overflow-wrap: break-word;
-
+    z-index: 3;
     transition: opacity 1s ease-in;
 
 }
