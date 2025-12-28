@@ -16,7 +16,7 @@ const revealQuoteScreen = document.getElementById('quote_reveal');
 const quoteContainerSize = parseFloat(getComputedStyle(document.getElementById('quote_container')).height);
 const quoteContainer = document.getElementById('quote_container');
 
-
+localStorage.getItem('quoteRevealed')|| false;
 
 
 const cup = document.getElementById('cup');
@@ -81,6 +81,12 @@ const months = {
 const date = new Date();
 const dateToday = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 
+const savedDate = localStorage.getItem('dateToday')|| dateToday;
+
+if (savedDate !== dateToday){
+    localStorage.setItem('quoteRevealed', false);
+    localStorage.setItem('dateToday', dateToday);
+}
 
 
 const STATES = {
@@ -91,6 +97,15 @@ const STATES = {
     COFFEE_READY : 'coffee_ready',
     QUOTE_REVEAL : 'quote_reveal'
 }
+
+const getDayOfYear = (date) =>{
+    const start = new Date(date.getFullYear(), 0, 1);
+    const difference = date - start;
+    const oneDay = 1000 * 60 * 60 * 24
+    return 1 + Math.floor(difference / oneDay);
+}
+
+const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
 
 const setStatus = (status)=>{
     document.querySelectorAll('.screenState').forEach(stateScreen => stateScreen.style.display ="none");
@@ -263,6 +278,7 @@ const ZoomIn =()=>{
         spinningLayer.style.animationPlayState = 'running';
         setTimeout(()=>quote.classList.add('display'), 300);
         setTimeout(()=>{
+            localStorage.setItem('quoteRevealed' , true);
             revealQuoteScreen.style.display = "none";
             
         }, 1000);
