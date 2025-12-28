@@ -75,6 +75,7 @@ const stateMachine = (currentState)=>{
         case STATES.PREP_COFFEE:
             const filledCup = "(Filled_cup.svg)";
             setStatus(prepCoffeeScreen);
+            spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
             cupContent.style.background = `url${filledCup}`;
             cupContent.style.backgroundSize = "contain";
@@ -98,13 +99,14 @@ const stateMachine = (currentState)=>{
 
         case STATES.COFFEE_READY:
             cupEmpty = false;
-            
+            spinningLayer.style.animationPlayState = 'running';
             returnCoffeeScreen.style.display = 'none';
             revealQuoteScreen.style.display = 'none';
 
             break
 
         case STATES.QUOTE_REVEAL:
+            spinningLayer.style.animationPlayState = 'paused';
             quote.style.fontSize = `${(quoteContainer.clientHeight * 40)/100}%`
             revealQuoteScreen.style.display = "flex";
             if (toReveal ? requestAnimationFrame(ZoomIn) : requestAnimationFrame(ZoomOut));
@@ -212,9 +214,9 @@ let currentScale = 1;
 
 const ZoomIn =()=>{
     toReveal = false;
-
+    
     if (currentScale >= revealSize){
-        
+        spinningLayer.style.animationPlayState = 'running';
         setTimeout(()=>quote.classList.add('display'), 500);
         setTimeout(()=>{
             revealQuoteScreen.style.display = "none";
@@ -225,7 +227,7 @@ const ZoomIn =()=>{
     }
 
     cup.style.transform = `scale(${currentScale})`;
-    currentScale += 0.03;
+    currentScale += 0.05;
     requestAnimationFrame(ZoomIn);
   
 }
@@ -239,7 +241,7 @@ const ZoomOut =()=>{
         return
     }
     cup.style.transform = `scale(${currentScale})`;
-     currentScale -= 0.03;
+     currentScale -= 0.05;
 
     requestAnimationFrame(ZoomOut);
 }

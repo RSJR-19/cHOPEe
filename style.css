@@ -131,8 +131,8 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-
-    transition: transform ease-out 0.3s;
+    will-change: transform;
+    
 }
 
 #cup_content{
@@ -158,7 +158,7 @@ main{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 101%;
+    width: 100%;
     opacity: 1;
     aspect-ratio: 1/1;
     border-radius: 100%;
@@ -169,6 +169,7 @@ main{
     z-index: 0;
     pointer-events: none;
     animation: stir 60s linear infinite;
+    
 }
 
 
@@ -211,7 +212,7 @@ main{
 
     z-index: 3;
     transition: opacity 0.5s ease-in;
-
+    will-change: opacity;
 }
 
 
@@ -221,6 +222,7 @@ main{
     position: absolute;
     transition: transform 0.5s ease-out;
     z-index: 3;
+    will-change: bottom;
 }
 
 /* Classlists */
