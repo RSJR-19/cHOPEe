@@ -159,6 +159,7 @@ main{
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
+    
     opacity: 1;
     aspect-ratio: 1/1;
     border-radius: 100%;
@@ -169,7 +170,7 @@ main{
     z-index: 0;
     pointer-events: none;
     animation: stir 60s linear infinite;
-    
+    backface-visibility: hidden;
 }
 
 
@@ -211,7 +212,7 @@ main{
     overflow-wrap: break-word;
 
     z-index: 3;
-    transition: opacity 0.5s ease-in;
+    transition: opacity 0.5s ease-in-out;
     will-change: opacity;
 }
 
@@ -238,8 +239,9 @@ main{
 
 /* animations / Keyframes */
 @keyframes stir{
+    
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg) scale(1.01);
     }
 }
 

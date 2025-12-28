@@ -133,7 +133,7 @@ const grabCup=()=>{
     const currentBottom = parseFloat(getComputedStyle(hand).bottom);
     const cupHeight = cup.getBoundingClientRect().height;
 
-    const target = cupRect.bottom - ((cupHeight * 10) / 100 );
+    const target = cupRect.bottom - ((cupHeight * 10.5) / 100 );
     const distance = target - currentBottom;
 
     handCollisionPoint = target;
@@ -217,11 +217,11 @@ const ZoomIn =()=>{
     
     if (currentScale >= revealSize){
         spinningLayer.style.animationPlayState = 'running';
-        setTimeout(()=>quote.classList.add('display'), 500);
+        setTimeout(()=>quote.classList.add('display'), 300);
         setTimeout(()=>{
             revealQuoteScreen.style.display = "none";
             
-        }, 1200);
+        }, 1000);
 
         return
     }
