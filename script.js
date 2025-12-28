@@ -1,5 +1,8 @@
 import getQuoteToday from "./quotes.js";
 
+const spacer1 = document.getElementById('spacer1');
+const spacer2 = document.getElementById('spacer2');
+
 
 const loadingScreen = document.getElementById('loading');
 const mainScreen = document.getElementById('main');
@@ -38,6 +41,8 @@ mainScreen.style.display = 'none';
 
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
+
+
 
 
 

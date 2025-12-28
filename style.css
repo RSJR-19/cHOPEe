@@ -33,19 +33,21 @@ main{
 #main{
     height: 100%;
     width: 100%;
-    background-color: white;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color:black;
     position: relative;
+    
 }
 .top_spacer{
     height: 10dvh;
     width: 100%;
-    background-color: red;
+    background:linear-gradient(whitesmoke,white ) ;
     position: absolute;
+    border-bottom: black 3px solid;
     top: 0;
     z-index: 22;
     
@@ -53,7 +55,8 @@ main{
 .bot_spacer{
     height: 10dvh;
     width: 100%;
-    background-color: red;
+    background:linear-gradient(white, whitesmoke ) ;
+    border-top: black 3px solid;
     position: absolute;
     bottom: 0;
     z-index: 22;
@@ -124,7 +127,7 @@ main{
     background-position: center;
     background-size: cover;
     aspect-ratio: 1/1;
-
+    
     position: absolute;
     border-radius: 50%;
     z-index: 2;
@@ -247,17 +250,3 @@ main{
 
 
 
-@media (min-width: 900px) {
-
-    #hand{
-        width: 10%;
-    }
-    .bot_spacer{
-        height: 0dvh;
-        
-    }
-    .top_spacer{
-        height: 0dvh;
-    }
-
-}
