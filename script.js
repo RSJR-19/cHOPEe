@@ -1,6 +1,8 @@
 import getQuoteToday from "./quotes.js";
 
 const spacer1 = document.getElementById('spacer1');
+const spacer1Height = parseFloat(getComputedStyle(spacer1).height);
+
 const spacer2 = document.getElementById('spacer2');
 
 
@@ -24,6 +26,9 @@ const handle = document.getElementById('handle');
 const hand = document.getElementById('hand');
 const quote = document.getElementById('quote');
 
+const dayTodaySpan = document.getElementById('day_today');
+const dateTodaySpan = document.getElementById('date_today');
+
 let cupEmpty = true;
 
 const windowHeight = window.innerHeight;
@@ -41,8 +46,40 @@ mainScreen.style.display = 'none';
 
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
+dayTodaySpan.style.fontSize = `${(spacer1Height * 25)/100}px`;
+dateTodaySpan.style.fontSize = `${(spacer1Height * 35)/100}px`;
 
 
+
+const daysOfWeek = {
+    0 : "Sunday",
+    1 : "Monday",
+    2 : "Tuesday",
+    3 : "Wednesday",
+    4 : 'Thursday',
+    5 : 'Friday',
+    6 : 'Saturday'
+
+}
+const dayToday = new Date().getDay();
+
+
+const months = {
+    0 : 'Jan',
+    1 : 'Feb',
+    2 : 'Mar',
+    3 : 'Apr',
+    4 : 'May',
+    5 : 'Jun',
+    6 : 'Jul',
+    7 : 'Aug',
+    8 : 'Sep',
+    9 : 'Oct',
+    10 : 'Nov',
+    11 : 'Dec'
+}
+const date = new Date();
+const dateToday = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 
 
 
@@ -68,6 +105,8 @@ const stateMachine = (currentState)=>{
             break
         
         case STATES.COFFEE_EMPTY:
+            dayTodaySpan.innerHTML = daysOfWeek[dayToday];
+            dateTodaySpan.innerHTML = dateToday;
             setStatus(coffeeEmptyScreen);
             spinningLayer.style.display = 'none';
             hand.style.bottom = `${windowHeight}px`;
@@ -96,7 +135,7 @@ const stateMachine = (currentState)=>{
         case STATES.RETURN_COFFEE:
             setStatus(coffeeEmptyScreen);
             
-            currentScreenState.innerHTML = 'Return_coffee';
+            
             returnCoffeeScreen.style.display = 'flex';
             requestAnimationFrame(returnCupBack);
 

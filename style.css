@@ -33,7 +33,7 @@ main{
 #main{
     height: 100%;
     width: 100%;
-
+    background: linear-gradient(135deg, whitesmoke, white);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,19 +43,36 @@ main{
     
 }
 .top_spacer{
-    height: 10dvh;
+    height: 13dvh;
     width: 100%;
-    background:linear-gradient(whitesmoke,white ) ;
+    background:linear-gradient(#e9e5e1,#dcd7d3 ) ;
     position: absolute;
     border-bottom: black 3px solid;
     top: 0;
     z-index: 22;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
     
 }
+.top_spacer span{
+    margin: 0;
+    padding: 0;
+    
+}
+#day_today {
+    font-size: 30px;
+    
+}
+#date_today{
+    font-size: 50px;
+}
+
 .bot_spacer{
     height: 10dvh;
     width: 100%;
-    background:linear-gradient(white, whitesmoke ) ;
+    background:linear-gradient(#e9e5e1,#dcd7d3 ) ;
     border-top: black 3px solid;
     position: absolute;
     bottom: 0;
