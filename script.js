@@ -21,6 +21,7 @@ localStorage.getItem('quoteRevealed')|| false;
 
 const cup = document.getElementById('cup');
 const cupContent = document.getElementById('cup_content');
+const cupPrepScreen = document.getElementById('cup-prep');
 const spinningLayer = document.getElementById('cup_content_display');
 const handle = document.getElementById('handle');
 const hand = document.getElementById('hand');
@@ -47,9 +48,14 @@ let toReveal = true;
 mainScreen.style.display = 'none';
 
 
+
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
 paws.style.height = `${(Math.abs(windowWidth - windowHeight) * 2)/100}%`;
+
+cupPrepScreen.style.height = `${windowWidth >= windowHeight ? 75 : 25}%`;
+cupPrepScreen.style.width = `${windowWidth >= windowHeight ? 33 : 40}%`;
+
 
 const middleSize = (parseFloat(getComputedStyle(paws).width) * 5)/100;
 
@@ -128,12 +134,15 @@ const stateMachine = (currentState)=>{
     switch(currentState){
         case STATES.LOADING:
             setStatus(loadingScreen);
+            
             break
         
         case STATES.COFFEE_EMPTY:
+            setStatus(coffeeEmptyScreen);
             dayTodaySpan.innerHTML = daysOfWeek[dayToday];
             dateTodaySpan.innerHTML = dateToday;
-            setStatus(coffeeEmptyScreen);
+            
+            prepCoffeeScreen.style.display = 'flex'; // remove later
             spinningLayer.style.display = 'none';
             hand.style.bottom = `${windowHeight}px`;
             initialCupBot = parseFloat(getComputedStyle(cup).bottom);
@@ -143,14 +152,11 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.PREP_COFFEE:
-            const filledCup = "(Filled_cup.svg)";
+            
             setStatus(prepCoffeeScreen);
             spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
-            cupContent.style.background = `url${filledCup}`;
-            cupContent.style.backgroundSize = "contain";
-            cupContent.style.backgroundPosition = 'center';
-            cupContent.style.backgroundRepeat = 'no-repeat';
+
             todayQuote = getQuoteToday(1);
             quote.innerHTML = todayQuote;
 
@@ -160,8 +166,6 @@ const stateMachine = (currentState)=>{
 
         case STATES.RETURN_COFFEE:
             setStatus(coffeeEmptyScreen);
-            
-            
             returnCoffeeScreen.style.display = 'flex';
             requestAnimationFrame(returnCupBack);
 

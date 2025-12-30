@@ -60,9 +60,6 @@ main{
     transition: all 0.6s ease-in-out;
 }
 
-.top_spacer.show{
-    transform: translateY(0);
-}
 .top_spacer span{
     margin: 0;
     padding: 0;
@@ -89,9 +86,7 @@ main{
     transition: all 0.6s ease-in-out;
 }
 
-.bot_spacer.show{
-    transform: translateY(0);
-}
+
 .stage{
     height: 100%;
     width: 100%;
@@ -129,6 +124,17 @@ main{
     align-items: center;
     position: absolute;
 }
+
+#prep_coffee{
+    background-color: white;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    z-index: 99;
+}
+
 #return_coffee{
     height: 100%;
     width: 100%;
@@ -150,6 +156,51 @@ main{
     position: absolute;
     z-index: 10;
 }
+
+/* Prep Coffee Screen */
+.upper-prep{
+    height: 50dvh;
+    width: 100%;
+    background-color: yellow;
+}
+.lower-prep{
+    height: 50dvh;
+    width: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+#cup-prep{
+    position: relative;
+    border-radius: 0 0 50% 50%;
+    background:linear-gradient(rgba(0, 0, 0, 0.099), white);
+    border: 5px solid black;
+    display: flex;
+    align-items: flex-start;
+
+}
+.cup-handle-prep{
+    height: 60%;
+    width: 30%;
+    
+    position: absolute;
+    border-radius: 0 50% 50% 0;
+    left: 100%;
+    border: 5px black solid;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.cup-handle-inside{
+    height: 70%;
+    width: 80%;
+    border: 5px black solid;
+    border-left: 0px black solid;
+    border-radius:  0 50% 50% 0;
+}
+
+
 
 /* Objects */
 #cup{
@@ -294,6 +345,12 @@ main{
 
 #quote.display{
     opacity: 1;
+}
+.bot_spacer.show{
+    transform: translateY(0);
+}
+.top_spacer.show{
+    transform: translateY(0);
 }
 
 
