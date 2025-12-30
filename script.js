@@ -36,7 +36,7 @@ const windowWidth = window.innerWidth;
 const currentScreenState = document.getElementById('currentScreenState');
 
 let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
-let handCollisionPoint = ''; // this is the collision point ng hand at ng cup.
+let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 
 let todayQuote = "";
 let toReveal = true;
@@ -44,10 +44,13 @@ let toReveal = true;
 
 mainScreen.style.display = 'none';
 
+
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
+
 dayTodaySpan.style.fontSize = `${(spacer1Height * 25)/100}px`;
 dateTodaySpan.style.fontSize = `${(spacer1Height * 35)/100}px`;
+
 
 
 
@@ -273,7 +276,8 @@ let currentScale = 1;
 
 const ZoomIn =()=>{
     toReveal = false;
-    
+    spacer1.classList.add('show');
+    spacer2.classList.add('show');
     if (currentScale >= revealSize){
         spinningLayer.style.animationPlayState = 'running';
         setTimeout(()=>quote.classList.add('display'), 300);
@@ -292,6 +296,8 @@ const ZoomIn =()=>{
   
 }
 const ZoomOut =()=>{
+    spacer1.classList.remove('show');
+    spacer2.classList.remove('show');
     quote.classList.remove('display')
     revealQuoteScreen.style.display = "flex";
     if (currentScale <= 1){
