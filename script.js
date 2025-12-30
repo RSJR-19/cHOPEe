@@ -24,6 +24,8 @@ const cupContent = document.getElementById('cup_content');
 const spinningLayer = document.getElementById('cup_content_display');
 const handle = document.getElementById('handle');
 const hand = document.getElementById('hand');
+const paws = document.getElementById('paws');
+const middle = document.getElementById('middle');
 const quote = document.getElementById('quote');
 
 const dayTodaySpan = document.getElementById('day_today');
@@ -47,6 +49,12 @@ mainScreen.style.display = 'none';
 
 cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
+paws.style.height = `${(Math.abs(windowWidth - windowHeight) * 2)/100}%`;
+
+const middleSize = (parseFloat(getComputedStyle(paws).width) * 5)/100;
+
+middle.style.borderLeft = `${middleSize}px rgb(54, 54, 54) solid`;
+middle.style.borderRight = `${middleSize}px rgb(54, 54, 54) solid`;
 
 dayTodaySpan.style.fontSize = `${(spacer1Height * 25)/100}px`;
 dateTodaySpan.style.fontSize = `${(spacer1Height * 35)/100}px`;

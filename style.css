@@ -57,7 +57,7 @@ main{
     align-items: center;
     flex-direction: column; 
     
-    transition: all 0.5s ease-in-out;
+    transition: all 0.6s ease-in-out;
 }
 
 .top_spacer.show{
@@ -70,7 +70,7 @@ main{
 }
 #day_today {
     font-size: 30px;
-    
+    font-weight: bold;
 }
 #date_today{
     font-size: 50px;
@@ -86,7 +86,7 @@ main{
     position: absolute;
     bottom: 0;
     z-index: 22;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.6s ease-in-out;
 }
 
 .bot_spacer.show{
@@ -253,17 +253,38 @@ main{
 
 #hand{
     height:50%;
-    width: min(40vw, 220px);
-    background: url(Hand.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
     position: absolute;
-    transition: transform 0.5s ease-out;
     z-index: 3;
+    border-radius: 0 0 50px 50px;
+    border: 5px solid rgb(54, 54, 54);
+    border-top: 0;
+    display: flex;
+    align-items: flex-end;
     will-change: bottom;
-     background-color: green;
+     background-color: white;
+     overflow: hidden;
 }
+
+.paws{
+    height: 10dvh;
+    width: 100%;
+    border-radius: 0 0 50px 50px;
+    
+    display: flex;
+    overflow: hidden;
+}
+.finger{
+    height: 100%;
+    flex: 1;
+ 
+  
+}
+
+.paws.finger:nth-child(2){
+    border-left: 2px rgb(54, 54, 54) solid;
+    border-right: 2px rgb(54, 54, 54) solid;
+}
+
 
 /* Classlists */
 #cup.reveal{
