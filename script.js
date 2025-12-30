@@ -53,8 +53,8 @@ cup.style.width = `${windowHeight >= windowWidth ? 80 : 40}%`
 hand.style.width = `${windowHeight >= windowWidth ? 20 : 10}%`;
 paws.style.height = `${(Math.abs(windowWidth - windowHeight) * 2)/100}%`;
 
-cupPrepScreen.style.height = `${windowWidth >= windowHeight ? 75 : 25}%`;
-cupPrepScreen.style.width = `${windowWidth >= windowHeight ? 33 : 40}%`;
+cupPrepScreen.style.height = `${(windowWidth >= windowHeight ? 75 : 25)+ (windowHeight/70)}%`;
+cupPrepScreen.style.width = `${(windowWidth >= windowHeight ? 33 : 40)}%`;
 
 
 const middleSize = (parseFloat(getComputedStyle(paws).width) * 5)/100;
