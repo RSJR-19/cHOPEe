@@ -146,8 +146,6 @@ const stateMachine = (currentState)=>{
             setStatus(coffeeEmptyScreen);
             dayTodaySpan.innerHTML = daysOfWeek[dayToday];
             dateTodaySpan.innerHTML = dateToday;
-            
-            prepCoffeeScreen.style.display = 'flex'; // remove later
             spinningLayer.style.display = 'none';
             hand.style.bottom = `${windowHeight}px`;
             initialCupBot = parseFloat(getComputedStyle(cup).bottom);
@@ -157,13 +155,14 @@ const stateMachine = (currentState)=>{
             break
 
         case STATES.PREP_COFFEE:
-            
             setStatus(prepCoffeeScreen);
+            setTimeout(()=>{
+                cupPrepScreen.classList.add('upward')
+                setTimeout(()=>{requestAnimationFrame(flowingLetterEffect)},800);
+            },500)
             spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
             quote.innerHTML = todayQuote;
-            flowingLetterEffect();
-            setTimeout(()=>stateMachine(STATES.RETURN_COFFEE), 2000); //testing value only;
 
             break
 
@@ -233,6 +232,7 @@ const flowingLetterEffect = () =>{
             setTimeout(()=>{
                 coffeeFlow.style.transition = `transform 1.5s ease-out`;
                 coffeeFlow.style.transform = `translateY(100%)`
+                setTimeout(()=>stateMachine(STATES.RETURN_COFFEE),1600);
             }, 2000);
         }, 1000)
 
@@ -240,10 +240,6 @@ const flowingLetterEffect = () =>{
 
     
 }
-
-requestAnimationFrame(flowingLetterEffect)
-
-
 
 
 const grabCup=()=>{
@@ -279,8 +275,9 @@ const takeCupBack = () =>{
     const cupCurrentBottom = parseFloat(getComputedStyle(cup).bottom);
 
     if (currentBottom >= windowHeight && cupCurrentBottom >= windowHeight){
-
-        stateMachine(STATES.PREP_COFFEE);
+        setTimeout(()=>{
+        stateMachine(STATES.PREP_COFFEE)
+        }, 1000);
         return
     };
 

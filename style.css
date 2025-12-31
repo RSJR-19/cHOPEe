@@ -176,11 +176,14 @@ main{
 }
 #cup-prep{
     position: relative;
+    top: 100%;
     border-radius: 0 0 50% 50%;
     background:linear-gradient(rgba(0, 0, 0, 0.099), white);
     border: 5px solid black;
     display: flex;
     align-items: flex-start;
+
+    transition: top 0.3s ease-out;
 
 }
 .line{
@@ -395,6 +398,9 @@ transition: transform 0.5s ease-out;
 }
 .letter.fall{
     top: 100%;
+}
+#cup-prep.upward{
+    top: 0;
 }
 
 
