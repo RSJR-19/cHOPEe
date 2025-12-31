@@ -203,7 +203,8 @@ window.addEventListener('load', ()=>{
     },1000); //For testing only //
 });
 
-const word = [...todayQuote];
+const word = [...todayQuote]
+.filter(letter => /^[a-zA-Z]$/.test(letter));
 coffeeFlow.style.display = 'none';
 
 const flowingLetterEffect = () =>{
@@ -222,11 +223,18 @@ const flowingLetterEffect = () =>{
 
         setTimeout(()=>{
             requestAnimationFrame(flowingLetterEffect)
-        },700)
-        
-
-        
-       
+        },270)
+    }
+    else{
+        setTimeout(()=>{
+        letterFlow.style.display = 'none';
+        coffeeFlow.style.display = 'flex';
+            setTimeout(()=>coffeeFlow.classList.add('pour'), 100);
+            setTimeout(()=>{
+                coffeeFlow.style.transition = `transform 1.5s ease-out`;
+                coffeeFlow.style.transform = `translateY(100%)`
+            }, 2000);
+        }, 1000)
 
     }
 

@@ -164,7 +164,7 @@ main{
     display: flex;
     justify-content: center;
     position: relative;
-    
+    overflow: hidden;
    
 }
 .lower-prep{
@@ -209,6 +209,7 @@ main{
     border-radius:  0 50% 50% 0;
 }
 #coffee-flow{
+    display: flex;
     height: 100%;
     width: 20%;
     background-color: rgb(244, 198, 113);
@@ -218,17 +219,24 @@ main{
 
 background-size: 200% 200%;
 animation: flow 0.7s linear infinite;
-transition: transform 1s ease-in;
+transition: transform 0.5s ease-out;
 }
 
 #letter-flow{
     height: 100%;
     width: 20%;
     position: relative;
-    overflow-y: hidden;
-    overflow-x: visible;
+    overflow: hidden;
 }
 
+.letter{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: block;
+    pointer-events: none;
+    will-change: transform;
+}
 
 
 
@@ -382,7 +390,7 @@ transition: transform 1s ease-in;
 .top_spacer.show{
     transform: translateY(0);
 }
-.coffee-flow.pour{
+#coffee-flow.pour{
     transform: translateY(0);
 }
 .letter.fall{
@@ -410,14 +418,17 @@ transition: transform 1s ease-in;
 @keyframes letterFalling {
     0%{
         top: -10%;
-        transform: rotate(360);
+        transform: rotate(-360deg);
     }
     100%{
         top: 100%;
+        transform: rotate(360deg);
         
     }
 
     }
+
+
 
 
 
