@@ -1,3 +1,4 @@
+
 import getQuoteToday from "./quotes.js";
 
 const spacer1 = document.getElementById('spacer1');
@@ -18,7 +19,8 @@ const quoteContainer = document.getElementById('quote_container');
 
 localStorage.getItem('quoteRevealed')|| false;
 
-
+const coffeeFlow = document.getElementById('coffee-flow');
+const letterFlow = document.getElementById('letter-flow');
 const cup = document.getElementById('cup');
 const cupContent = document.getElementById('cup_content');
 const cupPrepScreen = document.getElementById('cup-prep');
@@ -38,11 +40,13 @@ const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
 const currentScreenState = document.getElementById('currentScreenState');
 
+
+
 let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
 let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 
-let todayQuote = "";
 let toReveal = true;
+let todayQuote = getQuoteToday(1);
 
 
 mainScreen.style.display = 'none';
@@ -55,6 +59,7 @@ paws.style.height = `${(Math.abs(windowWidth - windowHeight) * 2)/100}%`;
 
 cupPrepScreen.style.height = `${(windowWidth >= windowHeight ? 75 : 25)+ (windowHeight/70)}%`;
 cupPrepScreen.style.width = `${(windowWidth >= windowHeight ? 33 : 40)}%`;
+coffeeFlow.style.width = `${(parseFloat(getComputedStyle(cupPrepScreen).width)*30)/100}%`;
 
 
 const middleSize = (parseFloat(getComputedStyle(paws).width) * 5)/100;
@@ -156,10 +161,8 @@ const stateMachine = (currentState)=>{
             setStatus(prepCoffeeScreen);
             spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
-
-            todayQuote = getQuoteToday(1);
             quote.innerHTML = todayQuote;
-
+            flowingLetterEffect();
             setTimeout(()=>stateMachine(STATES.RETURN_COFFEE), 2000); //testing value only;
 
             break
@@ -199,6 +202,40 @@ window.addEventListener('load', ()=>{
 
     },1000); //For testing only //
 });
+
+const word = [...todayQuote];
+coffeeFlow.style.display = 'none';
+
+const flowingLetterEffect = () =>{
+
+    
+
+    if (word.length > 0){
+        const letter = document.createElement('h1');
+        letter.textContent = word.pop();
+        letter.style.position = `absolute`;
+        letter.className = 'letter';
+        letter.style.transition = `top 0.5s ease-in-out`;
+        letter.style.left = `${Math.floor(Math.random()* 15 + 1) * 5}%`;
+        letter.style.animation = `letterFalling 1s linear forwards `;
+        letterFlow.appendChild(letter);
+
+        setTimeout(()=>{
+            requestAnimationFrame(flowingLetterEffect)
+        },700)
+        
+
+        
+       
+
+    }
+
+    
+}
+
+requestAnimationFrame(flowingLetterEffect)
+
+
 
 
 const grabCup=()=>{
@@ -281,6 +318,9 @@ const returnHand = ()=>{
     hand.style.bottom = `${handPosition + 10}px`;
     requestAnimationFrame(returnHand);
 }
+
+
+
 
 const revealSize = 2.5;
 let currentScale = 1;
