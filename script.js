@@ -54,7 +54,7 @@ let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 
 let toReveal = true;
 let todayQuote = "";
-
+let word = "";
 
 mainScreen.style.display = 'none';
 
@@ -174,6 +174,8 @@ const stateMachine = (currentState)=>{
         
         case STATES.COFFEE_EMPTY:
             todayQuote = getQuoteToday(totalDay);
+            word = [...todayQuote]
+            .filter(letter => /^[a-zA-Z]$/.test(letter));
             setStatus(coffeeEmptyScreen);
             dayTodaySpan.innerHTML = daysOfWeek[dayToday];
             dateTodaySpan.innerHTML = dateToday;
@@ -228,8 +230,7 @@ const stateMachine = (currentState)=>{
     }
 }
 
-const word = [...todayQuote]
-.filter(letter => /^[a-zA-Z]$/.test(letter));
+
 coffeeFlow.style.display = 'none';
 
 const flowingLetterEffect = () =>{
