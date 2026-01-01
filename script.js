@@ -53,7 +53,7 @@ let initialCupBot = ""; // This is the initial position of the empty cup bago yu
 let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 
 let toReveal = true;
-let todayQuote = getQuoteToday(1);
+let todayQuote = "";
 
 
 mainScreen.style.display = 'none';
@@ -135,7 +135,10 @@ const getDayOfYear = (date) =>{
     return 1 + Math.floor(difference / oneDay);
 }
 
+
+
 const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+
 
 
 window.addEventListener('load', ()=>{
@@ -170,6 +173,7 @@ const stateMachine = (currentState)=>{
             break
         
         case STATES.COFFEE_EMPTY:
+            todayQuote = getQuoteToday(totalDay);
             setStatus(coffeeEmptyScreen);
             dayTodaySpan.innerHTML = daysOfWeek[dayToday];
             dateTodaySpan.innerHTML = dateToday;

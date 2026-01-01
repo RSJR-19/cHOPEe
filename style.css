@@ -181,6 +181,8 @@ main{
 
 .bot_spacer h1{
     color: rgb(41, 40, 40);
+    align-self: center;
+    justify-self: center;
 }
 /* Prep Coffee Screen */
 .upper-prep{
