@@ -38,6 +38,7 @@ const dateTodaySpan = document.getElementById('date_today');
 
 const music = document.getElementById('bgm');
 const click = document.getElementById('click');
+const pour = document.getElementById('pour');
 
 let cupEmpty = true;
 
@@ -142,14 +143,14 @@ window.addEventListener('load', ()=>{
 
 loadingScreen.addEventListener('click', ()=>{
     music.play();
-    music.volume = 0.7;
+    music.volume = 0.5;
     mainScreen.style.display = 'flex';
     stateMachine(STATES.COFFEE_EMPTY);
 });
 
 cup.addEventListener('click', ()=>{
     click.play();
-    click.volume = 0.5;
+    click.volume = 0.3;
 });
 
 const setStatus = (status)=>{
@@ -181,7 +182,11 @@ const stateMachine = (currentState)=>{
             setStatus(prepCoffeeScreen);
             setTimeout(()=>{
                 cupPrepScreen.classList.add('upward')
-                setTimeout(()=>{requestAnimationFrame(flowingLetterEffect)},800);
+                setTimeout(()=>{
+                    requestAnimationFrame(flowingLetterEffect)
+                    pour.play();
+                    pour.volume = 1.1;
+                },800);
             },50)
             spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
@@ -241,7 +246,11 @@ const flowingLetterEffect = () =>{
         setTimeout(()=>{
         letterFlow.style.display = 'none';
         
-            setTimeout(()=>cupPrepScreen.classList.remove('upward'), 500);
+            setTimeout(()=>{cupPrepScreen.classList.remove('upward')
+                pour.pause();
+                pour.currentTime = 0;
+            }
+                , 500);
             setTimeout(()=>{
                 stateMachine(STATES.RETURN_COFFEE)
             }, 1000);
