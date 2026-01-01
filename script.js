@@ -31,8 +31,13 @@ const paws = document.getElementById('paws');
 const middle = document.getElementById('middle');
 const quote = document.getElementById('quote');
 
+
 const dayTodaySpan = document.getElementById('day_today');
 const dateTodaySpan = document.getElementById('date_today');
+
+
+const music = document.getElementById('bgm');
+const click = document.getElementById('click');
 
 let cupEmpty = true;
 
@@ -50,6 +55,7 @@ let todayQuote = getQuoteToday(1);
 
 
 mainScreen.style.display = 'none';
+
 
 
 
@@ -129,6 +135,23 @@ const getDayOfYear = (date) =>{
 
 const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
 
+
+window.addEventListener('load', ()=>{
+    stateMachine(STATES.LOADING);
+});
+
+loadingScreen.addEventListener('click', ()=>{
+    music.play();
+    music.volume = 0.7;
+    mainScreen.style.display = 'flex';
+    stateMachine(STATES.COFFEE_EMPTY);
+});
+
+cup.addEventListener('click', ()=>{
+    click.play();
+    click.volume = 0.5;
+});
+
 const setStatus = (status)=>{
     document.querySelectorAll('.screenState').forEach(stateScreen => stateScreen.style.display ="none");
     status.style.display = 'flex';
@@ -159,7 +182,7 @@ const stateMachine = (currentState)=>{
             setTimeout(()=>{
                 cupPrepScreen.classList.add('upward')
                 setTimeout(()=>{requestAnimationFrame(flowingLetterEffect)},800);
-            },500)
+            },50)
             spinningLayer.style.display = 'flex';
             returnCoffeeScreen.style.display = 'flex';
             quote.innerHTML = todayQuote;
@@ -192,16 +215,6 @@ const stateMachine = (currentState)=>{
     }
 }
 
-window.addEventListener('load', ()=>{
-    stateMachine(STATES.LOADING);
-    setTimeout(()=>{
-        mainScreen.style.display = 'flex';
-        stateMachine(STATES.COFFEE_EMPTY);
-        
-
-    },1000); //For testing only //
-});
-
 const word = [...todayQuote]
 .filter(letter => /^[a-zA-Z]$/.test(letter));
 coffeeFlow.style.display = 'none';
@@ -212,7 +225,7 @@ const flowingLetterEffect = () =>{
 
     if (word.length > 0){
         const letter = document.createElement('h1');
-        letter.textContent = word.pop();
+        letter.textContent = word.length % 2 == 0 ? word.pop() : word.shift();
         letter.style.position = `absolute`;
         letter.className = 'letter';
         letter.style.transition = `top 0.5s ease-in-out`;
@@ -222,18 +235,16 @@ const flowingLetterEffect = () =>{
 
         setTimeout(()=>{
             requestAnimationFrame(flowingLetterEffect)
-        },270)
+        },100)
     }
     else{
         setTimeout(()=>{
         letterFlow.style.display = 'none';
-        coffeeFlow.style.display = 'flex';
-            setTimeout(()=>coffeeFlow.classList.add('pour'), 100);
+        
+            setTimeout(()=>cupPrepScreen.classList.remove('upward'), 500);
             setTimeout(()=>{
-                coffeeFlow.style.transition = `transform 1.5s ease-out`;
-                coffeeFlow.style.transform = `translateY(100%)`
-                setTimeout(()=>stateMachine(STATES.RETURN_COFFEE),1600);
-            }, 2000);
+                stateMachine(STATES.RETURN_COFFEE)
+            }, 1000);
         }, 1000)
 
     }
@@ -277,7 +288,7 @@ const takeCupBack = () =>{
     if (currentBottom >= windowHeight && cupCurrentBottom >= windowHeight){
         setTimeout(()=>{
         stateMachine(STATES.PREP_COFFEE)
-        }, 1000);
+        }, 50);
         return
     };
 
@@ -316,7 +327,7 @@ const returnHand = ()=>{
     if (windowHeight <= handPosition){
         stateMachine(STATES.COFFEE_READY);
         spinningLayer.style.display = 'flex';
-       
+       cup.style.pointerEvents = 'auto';
         return
     }
 
@@ -337,7 +348,7 @@ const ZoomIn =()=>{
     spacer2.classList.add('show');
     if (currentScale >= revealSize){
         spinningLayer.style.animationPlayState = 'running';
-        setTimeout(()=>quote.classList.add('display'), 300);
+        setTimeout(()=>quote.classList.add('display'), 100);
         setTimeout(()=>{
             localStorage.setItem('quoteRevealed' , true);
             revealQuoteScreen.style.display = "none";
@@ -373,6 +384,7 @@ const ZoomOut =()=>{
 
 cup.addEventListener('click', ()=>{
     if (cupEmpty){
+        cup.style.pointerEvents = 'none';
         requestAnimationFrame(grabCup);
     }
     else{

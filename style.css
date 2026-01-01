@@ -46,7 +46,7 @@ main{
     will-change: transform;
     height: 10dvh;
     width: 100%;
-    background:linear-gradient(#e9e5e1,#dcd7d3 ) ;
+    background: linear-gradient(rgba(171, 120, 24, 0.586)),linear-gradient(135deg, whitesmoke, white);
     position: absolute;
     border-bottom: black 3px solid;
     top: 0;
@@ -78,7 +78,7 @@ main{
     height: 10dvh;
     transform: translateY(100%);
     width: 100%;
-    background:linear-gradient(#e9e5e1,#dcd7d3 ) ;
+    background: linear-gradient(rgba(171, 120, 24, 0.586)),linear-gradient(135deg, whitesmoke, white);
     border-top: black 3px solid;
     position: absolute;
     bottom: 0;
@@ -88,6 +88,7 @@ main{
 
 
 .stage{
+    background: linear-gradient(rgba(255, 166, 0, 0.586) 80%);
     height: 100%;
     width: 100%;
     display: flex;
@@ -126,13 +127,12 @@ main{
 }
 
 #prep_coffee{
-    background-color: white;
+    background: linear-gradient(rgba(255, 166, 0, 0.586), linear-gradient(135deg, whitesmoke, white));
     height: 100dvh;
     width: 100%;
     display: flex;
     position: absolute;
     flex-direction: column;
-    z-index: 99;
 }
 
 #return_coffee{
@@ -178,12 +178,18 @@ main{
     position: relative;
     top: 100%;
     border-radius: 0 0 50% 50%;
-    background:linear-gradient(rgba(0, 0, 0, 0.099), white);
+    background-color: white;
     border: 5px solid black;
     display: flex;
     align-items: flex-start;
 
-    transition: top 0.3s ease-out;
+    transition: top 0.2s ease-out;
+    
+}
+.prep-text{
+position: absolute;
+top: 110%;
+
 
 }
 .line{
@@ -194,7 +200,7 @@ main{
 .cup-handle-prep{
     height: 60%;
     width: 30%;
-     background:linear-gradient(rgba(0, 0, 0, 0.099), white);
+    background-color: white;
     position: absolute;
     border-radius: 0 50% 50% 0;
     left: 100%;
@@ -207,7 +213,7 @@ main{
     height: 70%;
     width: 80%;
     border: 5px black solid;
-    background-color: whitesmoke;
+    background: linear-gradient(rgba(255,166,0,0.586), rgba(255,166,0,0.586)),linear-gradient(135deg, whitesmoke, white);
     border-left: 0px black solid;
     border-radius:  0 50% 50% 0;
 }
@@ -353,7 +359,7 @@ transition: transform 0.5s ease-out;
     display: flex;
     align-items: flex-end;
     will-change: bottom;
-     background-color: white;
+     background-color: hsl(0, 0%, 67%); /* SIX SEEVEEEEEEN */
      overflow: hidden;
 }
 
@@ -423,7 +429,7 @@ transition: transform 0.5s ease-out;
 
 @keyframes letterFalling {
     0%{
-        top: -10%;
+        top: 0%;
         transform: rotate(-360deg);
     }
     100%{
@@ -433,6 +439,7 @@ transition: transform 0.5s ease-out;
     }
 
     }
+
 
 
 
