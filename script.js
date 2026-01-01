@@ -39,6 +39,7 @@ const dateTodaySpan = document.getElementById('date_today');
 const music = document.getElementById('bgm');
 const click = document.getElementById('click');
 const pour = document.getElementById('pour');
+const order = document.getElementById('order');
 
 let cupEmpty = true;
 
@@ -142,14 +143,16 @@ window.addEventListener('load', ()=>{
 });
 
 loadingScreen.addEventListener('click', ()=>{
-    music.play();
+    music.play()
+    .catch(()=>{});
     music.volume = 0.5;
     mainScreen.style.display = 'flex';
     stateMachine(STATES.COFFEE_EMPTY);
 });
 
 cup.addEventListener('click', ()=>{
-    click.play();
+    click.play()
+    .catch(()=>{});
     click.volume = 0.3;
 });
 
@@ -184,7 +187,8 @@ const stateMachine = (currentState)=>{
                 cupPrepScreen.classList.add('upward')
                 setTimeout(()=>{
                     requestAnimationFrame(flowingLetterEffect)
-                    pour.play();
+                    pour.play()
+                    .catch(()=>{});
                     pour.volume = 1.1;
                 },800);
             },50)
@@ -312,12 +316,13 @@ const returnCupBack = () =>{
     const handBottom = parseFloat(getComputedStyle(hand).bottom);
 
 
-
-    console.log(cupBottom, initialCupBot);
-    console.log(handBottom, handCollisionPoint);
-
     if (cupBottom <= initialCupBot && handBottom <= handCollisionPoint){
-        setTimeout(()=>requestAnimationFrame(returnHand), 200);
+        setTimeout(()=>{
+            order.play()
+            .catch(()=>{});
+            order.volume = 0.5;
+            requestAnimationFrame(returnHand)
+        }, 200);
         
         return
 
