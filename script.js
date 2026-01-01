@@ -153,7 +153,7 @@ loadingScreen.addEventListener('click', ()=>{
 cup.addEventListener('click', ()=>{
     click.play()
     .catch(()=>{});
-    click.volume = 0.3;
+    click.volume = 0.2;
 });
 
 const setStatus = (status)=>{
