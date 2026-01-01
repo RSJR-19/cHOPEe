@@ -189,7 +189,7 @@ const stateMachine = (currentState)=>{
                     requestAnimationFrame(flowingLetterEffect)
                     pour.play()
                     .catch(()=>{});
-                    pour.volume = 1.1;
+                    pour.volume = 1;
                 },800);
             },50)
             spinningLayer.style.display = 'flex';
