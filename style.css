@@ -60,6 +60,7 @@ main{
     transition: all 0.6s ease-in-out;
 }
 
+
 .top_spacer span{
     margin: 0;
     padding: 0;
@@ -88,7 +89,12 @@ main{
     align-items: center;
     transition: all 0.6s ease-in-out;
 }
-
+.tap-text{
+    color: white;
+    top:85%;
+    position: absolute;
+    
+}
 
 .stage{
     background: linear-gradient(#ffa60095 80%);
@@ -119,6 +125,7 @@ main{
     align-items: center;
     color: white;
     flex-direction: column;
+    position: relative;
 }
 
 #coffee_empty{
@@ -176,6 +183,7 @@ main{
     position: absolute;
     align-self: center;
     justify-self: center;
+
     top: 80%;
 }
 
