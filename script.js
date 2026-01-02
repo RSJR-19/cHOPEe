@@ -55,6 +55,7 @@ let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 let toReveal = true;
 let todayQuote = "";
 let word = "";
+let installPrompt;
 
 mainScreen.style.display = 'none';
 
@@ -371,6 +372,7 @@ const ZoomIn =()=>{
         setTimeout(()=>{
             localStorage.setItem('quoteRevealed' , true);
             revealQuoteScreen.style.display = "none";
+            installApp()
             
         }, 1000);
 
@@ -415,6 +417,18 @@ cup.addEventListener('click', ()=>{
 
 window.addEventListener('resize', ()=>location.reload());
 
+if ('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+        navigator.serviceWorker.register('/sw.js');
+    })}
 
+window.addEventListener('beforeinstallprompt', event =>{
+    event.preventDefault();
+    installPrompt = event;
+});
 
-
+const installApp = ()=>{
+    if (installPrompt){
+        installPrompt.prompt();
+        installPrompt = null;
+    }};
