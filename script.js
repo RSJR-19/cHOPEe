@@ -30,7 +30,7 @@ const hand = document.getElementById('hand');
 const paws = document.getElementById('paws');
 const middle = document.getElementById('middle');
 const quote = document.getElementById('quote');
-
+const check = document.getElementById('check');
 
 const dayTodaySpan = document.getElementById('day_today');
 const dateTodaySpan = document.getElementById('date_today');
@@ -56,6 +56,7 @@ let toReveal = true;
 let todayQuote = "";
 let word = "";
 let installPrompt;
+
 
 mainScreen.style.display = 'none';
 
@@ -366,13 +367,15 @@ const ZoomIn =()=>{
     toReveal = false;
     spacer1.classList.add('show');
     spacer2.classList.add('show');
+    
     if (currentScale >= revealSize){
         spinningLayer.style.animationPlayState = 'running';
         setTimeout(()=>quote.classList.add('display'), 100);
         setTimeout(()=>{
             localStorage.setItem('quoteRevealed' , true);
             revealQuoteScreen.style.display = "none";
-            installApp()
+
+            
             
         }, 1000);
 
@@ -393,6 +396,8 @@ const ZoomOut =()=>{
         toReveal = true
         revealQuoteScreen.style.display = "none";
         stateMachine(STATES.COFFEE_READY);
+        check.classList.add('reveal');
+        installApp();
         return
     }
     cup.style.transform = `scale(${currentScale})`;

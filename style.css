@@ -93,9 +93,21 @@ main{
     color: white;
     top:85%;
     position: absolute;
-    
+
+}
+#check{
+    position: absolute;
+    top: 85%;
+    opacity: 0;
+
+    transition: opacity 0.8 ease-in-out;
 }
 
+#check.reveal{
+    opacity: 1;
+
+
+}
 .stage{
     background: linear-gradient(#ffa60095 80%);
     height: 100%;
