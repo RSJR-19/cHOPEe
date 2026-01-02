@@ -46,7 +46,7 @@ main{
     will-change: transform;
     height: 10dvh;
     width: 100%;
-    background: linear-gradient(rgba(171, 120, 24, 0.586)),linear-gradient(135deg, whitesmoke, white);
+    background: linear-gradient(#ab781895),linear-gradient(135deg, #f5f5f5, #ffffff);
     position: absolute;
     border-bottom: black 3px solid;
     top: 0;
@@ -78,7 +78,7 @@ main{
     height: 10dvh;
     transform: translateY(100%);
     width: 100%;
-    background: linear-gradient(rgba(171, 120, 24, 0.586)),linear-gradient(135deg, whitesmoke, white);
+    background: linear-gradient(#ab781895),linear-gradient(135deg, #f5f5f5, #ffffff);
     border-top: black 3px solid;
     position: absolute;
     bottom: 0;
@@ -91,7 +91,7 @@ main{
 
 
 .stage{
-    background: linear-gradient(rgba(255, 166, 0, 0.586) 80%);
+    background: linear-gradient(#ffa60095 80%);
     height: 100%;
     width: 100%;
     display: flex;
@@ -131,7 +131,7 @@ main{
 }
 
 #prep_coffee{
-    background: linear-gradient(rgba(255, 166, 0, 0.586), linear-gradient(135deg, whitesmoke, white));
+    background: linear-gradient(#ffa60095, linear-gradient(135deg, #f5f5f5, #ffffff));
     height: 100dvh;
     width: 100%;
     display: flex;
@@ -240,7 +240,7 @@ top: 110%;
     height: 70%;
     width: 80%;
     border: 5px black solid;
-    background: linear-gradient(rgba(255,166,0,0.586), rgba(255,166,0,0.586)),linear-gradient(135deg, whitesmoke, white);
+    background: linear-gradient(#ffa60095, #ffa60095),linear-gradient(135deg, #f5f5f5, #ffffff);
     border-left: 0px black solid;
     border-radius:  0 50% 50% 0;
 }
