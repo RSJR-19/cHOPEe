@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cHOPEe-v6';
+const CACHE_NAME = 'cHOPEe-v7';
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -18,7 +18,8 @@ const ASSETS_TO_CACHE = [
     './pour.mp3',
     './quotes.js',
     './short.svg',
-    './Plate.svg'
+    './Plate.svg',
+    './quotes.json'
 ]
 
 self.addEventListener('install', event =>{

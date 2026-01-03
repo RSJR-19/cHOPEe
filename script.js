@@ -175,9 +175,10 @@ window.addEventListener('load', ()=>{
 });
 
 loadingScreen.addEventListener('click', ()=>{
-    music.play()
-    .catch(()=>{});
+    if (music){
+    music.play().catch(()=>{});
     music.volume = 0.5;
+    };
     mainScreen.style.display = 'flex';
     stateMachine(STATES.COFFEE_EMPTY);
 });
