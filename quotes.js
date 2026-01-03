@@ -28,10 +28,8 @@ const quotes = {
     23 : "You've faced challenges before — you can do it again"
  }
 
-const getQuoteToday =(day)=>{
-    return quotes[day];
-}
 
-export default getQuoteToday;
+
+export default quotes;
 
 

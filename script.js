@@ -1,5 +1,6 @@
 
-import getQuoteToday from "./quotes.js";
+import quotes from "./quotes.js";
+localStorage.setItem('availableQuotes', JSON.stringify(quotes));
 
 const spacer1 = document.getElementById('spacer1');
 const spacer1Height = parseFloat(getComputedStyle(spacer1).height);
@@ -29,7 +30,11 @@ const handle = document.getElementById('handle');
 const hand = document.getElementById('hand');
 const paws = document.getElementById('paws');
 const middle = document.getElementById('middle');
+
+const quoteSupplyJSON = "https://raw.githubusercontent.com/RSJR-19/cHOPEe/refs/heads/main/quotes.json";
+
 const quote = document.getElementById('quote');
+const quoteStorage = JSON.parse(localStorage.getItem('availableQuotes'));
 const check = document.getElementById('check');
 
 const dayTodaySpan = document.getElementById('day_today');
@@ -52,14 +57,26 @@ const currentScreenState = document.getElementById('currentScreenState');
 let initialCupBot = ""; // This is the initial position of the empty cup bago yung grab cup animation;
 let handCollisionPoint = ''; // this is the collision point nung hand at ng cup.
 
+const date = new Date();
+
+const getDayOfYear = (date) =>{
+    const start = new Date(date.getFullYear(), 0, 1);
+    const difference = date - start;
+    const oneDay = 1000 * 60 * 60 * 24
+    return 1 + Math.floor(difference / oneDay);
+}
+
+
+const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+
 let toReveal = true;
-let todayQuote = "";
-let word = "";
+let todayQuote = quoteStorage[totalDay];
+let word = [...todayQuote]
+    .filter(letter => /^[a-zA-Z]$/.test(letter));
 let installPrompt;
 
 
 mainScreen.style.display = 'none';
-
 
 
 
@@ -110,7 +127,7 @@ const months = {
     10 : 'Nov',
     11 : 'Dec'
 }
-const date = new Date();
+
 const dateToday = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 
 const savedDate = localStorage.getItem('dateToday')|| dateToday;
@@ -130,21 +147,20 @@ const STATES = {
     QUOTE_REVEAL : 'quote_reveal'
 }
 
-const getDayOfYear = (date) =>{
-    const start = new Date(date.getFullYear(), 0, 1);
-    const difference = date - start;
-    const oneDay = 1000 * 60 * 60 * 24
-    return 1 + Math.floor(difference / oneDay);
+
+const getQuote =()=>{
+    fetch(quoteSupplyJSON)
+        .then(res => res.json())
+        .then(quotes => localStorage.setItem('availableQuotes', JSON.stringify(quotes)))
+        
+
+
 }
-
-
-
-const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-
 
 
 window.addEventListener('load', ()=>{
     stateMachine(STATES.LOADING);
+    getQuote()
 });
 
 loadingScreen.addEventListener('click', ()=>{
@@ -175,9 +191,6 @@ const stateMachine = (currentState)=>{
             break
         
         case STATES.COFFEE_EMPTY:
-            todayQuote = getQuoteToday(totalDay);
-            word = [...todayQuote]
-            .filter(letter => /^[a-zA-Z]$/.test(letter));
             setStatus(coffeeEmptyScreen);
             dayTodaySpan.innerHTML = daysOfWeek[dayToday];
             dateTodaySpan.innerHTML = dateToday;
