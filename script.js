@@ -1,6 +1,9 @@
 
 import quotes from "./quotes.js";
-localStorage.setItem('availableQuotes', JSON.stringify(quotes));
+
+if (!localStorage.getItem('availableQuotes')){  
+    localStorage.setItem('availableQuotes', JSON.stringify(quotes));
+}
 
 const spacer1 = document.getElementById('spacer1');
 const spacer1Height = parseFloat(getComputedStyle(spacer1).height);
@@ -70,9 +73,8 @@ const getDayOfYear = (date) =>{
 const totalDay = getDayOfYear(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
 
 let toReveal = true;
-let todayQuote = quoteStorage[totalDay];
-let word = [...todayQuote]
-    .filter(letter => /^[a-zA-Z]$/.test(letter));
+let todayQuote = quoteStorage[totalDay % quoteStorage.length];
+let word = [...todayQuote].filter(letter => /^[a-zA-Z]$/.test(letter));
 let installPrompt;
 
 
@@ -148,10 +150,19 @@ const STATES = {
 }
 
 
-const getQuote =()=>{
-    fetch(quoteSupplyJSON)
-        .then(res => res.json())
-        .then(quotes => localStorage.setItem('availableQuotes', JSON.stringify(quotes)))
+const getQuote = async()=>{
+
+    try{
+        const res = await fetch(quoteSupplyJSON);
+        const quotes = await res.json();
+        localStorage.setItem('availableQuotes', JSON.stringify(quotes));
+
+        todayQuote = quotes[totalDay];
+        word = [...todayQuote].filter(letter => /^[a-zA-Z]$/.test(letter));
+    }
+    catch(err) {
+        console.error('fail', err);
+    }
         
 
 

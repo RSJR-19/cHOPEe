@@ -97,7 +97,7 @@ main{
 }
 #check{
     position: absolute;
-    top: 85%;
+    top: 90%;
     opacity: 0;
 
     transition: opacity 0.8 ease-in-out;
