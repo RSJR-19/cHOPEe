@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cHOPEe-v7';
+const CACHE_NAME = 'cHOPEe-v8';
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -16,6 +16,8 @@ const ASSETS_TO_CACHE = [
     './click.mp3',
     './order.mp3',
     './pour.mp3',
+    './meow1.mp3',
+    './meow2.mp3',
     './quotes.js',
     './short.svg',
     './Plate.svg',

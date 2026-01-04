@@ -48,6 +48,7 @@ const music = document.getElementById('bgm');
 const click = document.getElementById('click');
 const pour = document.getElementById('pour');
 const order = document.getElementById('order');
+let meow1, meow2;
 
 let cupEmpty = true;
 
@@ -170,6 +171,11 @@ const getQuote = async()=>{
 
 
 window.addEventListener('load', ()=>{
+    meow1 = document.getElementById('meow1');
+    meow2 = document.getElementById('meow2');
+
+    console.log(meow1,meow2);
+
     stateMachine(STATES.LOADING);
     getQuote()
 });
@@ -311,6 +317,10 @@ const grabCup=()=>{
     
 
     if (Math.abs(distance)< 1){
+
+        if (meow1){
+            meow1.play().catch(()=>{});
+        }
         requestAnimationFrame(takeCupBack);
 
         return;
@@ -395,7 +405,13 @@ const ZoomIn =()=>{
     
     if (currentScale >= revealSize){
         spinningLayer.style.animationPlayState = 'running';
-        setTimeout(()=>quote.classList.add('display'), 100);
+        setTimeout(()=>{
+            quote.classList.add('display')
+            if (meow2){
+                meow2.play().catch(()=>{})
+            }
+        
+        }, 100);
         setTimeout(()=>{
             localStorage.setItem('quoteRevealed' , true);
             revealQuoteScreen.style.display = "none";
