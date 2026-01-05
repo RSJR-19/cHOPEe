@@ -21,7 +21,7 @@ const revealQuoteScreen = document.getElementById('quote_reveal');
 const quoteContainerSize = parseFloat(getComputedStyle(document.getElementById('quote_container')).height);
 const quoteContainer = document.getElementById('quote_container');
 
-localStorage.getItem('quoteRevealed')|| false;
+const quoteRevealed = localStorage.getItem('quoteRevealed') === 'true';
 
 const coffeeFlow = document.getElementById('coffee-flow');
 const letterFlow = document.getElementById('letter-flow');
@@ -463,10 +463,6 @@ cup.addEventListener('click', ()=>{
 
 window.addEventListener('resize', ()=>location.reload());
 
-if ('serviceWorker' in navigator){
-    window.addEventListener('load', ()=>{
-        navigator.serviceWorker.register('/sw.js');
-    })}
 
 window.addEventListener('beforeinstallprompt', event =>{
     event.preventDefault();
